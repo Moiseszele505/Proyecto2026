@@ -31,39 +31,39 @@ const Login = () => {
             console.error("Error en la solicitud:", err);
         }
 
-        
+
     };
 
     useEffect(() => {
-            const usuarioGuardado = localStorage.getItem("usuario-supabase");
-            if (usuarioGuardado) {
-                navegar("/");
-            }
-        }, [navegar]);
+        const usuarioGuardado = localStorage.getItem("usuario-supabase");
+        if (usuarioGuardado) {
+            navegar("/");
+        }
+    }, [navegar]);
 
-        const estiiloContenedor = {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "108%",
-            display: "flex",
-            alignItems: "center",
-            background: "linear-gradient(135deg, #FFDEE9, #B5FFFC)",
-            overflow: "hidden",
-            padding: "20px",
-        };
+    const estiloContenedor = {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #FFDEE9, #B5FFFC)",
+        overflow: "hidden",
+        padding: "20px",
+    };
 
-        return (<div style={estiloContenedor}>
-    <FormularioLogin
-        usuario={usuario}
-        contrasena={contrasena}
-        error={error}
-        setUsuario={setUsuario}
-        setContrasena={setContrasena}
-        iniciarSesion={iniciarSesion}
-    />
-</div>);
+    return (<div style={estiloContenedor}>
+        <FormularioLogin
+            usuario={usuario}
+            contrasena={contrasena}
+            error={error}
+            setUsuario={setUsuario}
+            setContrasena={setContrasena}
+            iniciarSesion={iniciarSesion}
+        />
+    </div>);
 
 }
 

@@ -16,7 +16,7 @@ const NotificacionOperacion = ({ mostrar, mensaje, tipo, onCerrar }) => {
     const dia = String(fecha.getDate()).padStart(2, '0');
 
     return `${dia}-${mes}-${anio} ${fecha.toTimeString().slice(0, 5)}`;
-  };
+  }
 
   return (
     <ToastContainer position="top-center" className="p-2">
@@ -47,6 +47,6 @@ const NotificacionOperacion = ({ mostrar, mensaje, tipo, onCerrar }) => {
       </Toast>
     </ToastContainer>
   );
-};
+}
 
 export default NotificacionOperacion;

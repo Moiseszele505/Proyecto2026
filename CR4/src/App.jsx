@@ -14,13 +14,11 @@ import "./App.css";
 
 const App = () => {
   return (
-    <Router>
-
+    <BrowserRouter>
       <Encabezado />
 
       <main className="margen-superior-main">
         <Routes>
-
           <Route path="/login" element={<Login />} />
 
           <Route path="/" element={<RutaProtegida><Inicio /></RutaProtegida>} />
@@ -29,12 +27,10 @@ const App = () => {
           <Route path="/productos" element={<RutaProtegida><Productos /></RutaProtegida>} />
 
           <Route path="*" element={<Pagina404 />} />
-
         </Routes>
       </main>
-    </Router>
+    </BrowserRouter>
   );
 };
 
 export default App;
-  
