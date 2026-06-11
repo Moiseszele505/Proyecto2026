@@ -54,7 +54,8 @@ const Login = () => {
         padding: "20px",
     };
 
-    return (<div style={estiloContenedor}>
+    return (
+    <div style={estiloContenedor}>
         <FormularioLogin
             usuario={usuario}
             contrasena={contrasena}

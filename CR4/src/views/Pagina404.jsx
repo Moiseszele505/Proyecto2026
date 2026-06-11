@@ -12,9 +12,6 @@ const Pagina404 = () => {
                         Catalogo
                     </h2>
 
-                    <p>
-                        Contenido temporal para pruebas de navegación.
-                    </p>
                 </Col>
             </Row>
         </Container>
