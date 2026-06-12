@@ -8,6 +8,8 @@ import ModalEdicionProducto from "../components/productos/ModalEdicionProducto";
 import ModalEliminacionProducto from "../components/productos/ModalEliminacionProducto";
 import TablaProductos from "../components/productos/TablaProducto";
 import TarjetaProductos from "../components/productos/TarjetasProductos";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const Productos = () => {
     const [productos, setProductos] = useState([]);
@@ -28,7 +30,7 @@ const Productos = () => {
     const [toast, setToast] = useState({ mostrar: false, mensaje: "", tipo: "" });
     const [textoBusqueda, setTextoBusqueda] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
-const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
+    const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
     const [mostrarModalEdicion, setMostrarModalEdicion] = useState(false);
     const [productoEditar, setProductoEditar] = useState(null);
     const [archivoActualizar, setArchivoActualizar] = useState(null);
@@ -308,6 +310,32 @@ const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
         }
     };
 
+    const generarPDFProducto = (producto) => {
+        const doc = new jsPDF();
+
+        doc.setFontSize(18);
+        doc.text("Reporte de Producto", 14, 20);
+
+        doc.line(14, 25, 195, 25);
+
+        autoTable(doc, {
+            startY: 35,
+            head: [["Campo", "Valor"]],
+            body: [
+                ["ID", producto.id_producto],
+                ["Nombre", producto.nombre_producto],
+                ["Descripción", producto.descripcion_producto],
+                ["Precio", `C$ ${producto.precio_producto}`],
+                ["Stock", producto.stock_producto],
+                ["Imagen", producto.imagen_producto || "Sin imagen"],
+                ["ID Categoría", producto.id_categoria],
+                ["Fecha de registro", producto.fecha_registro],
+            ],
+        });
+
+        doc.save(`producto_${producto.id_producto}.pdf`);
+    };
+
     return (
         <Container className="mt-3">
             {/* Título y botón */}
@@ -350,6 +378,7 @@ const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
                             productos={productosFiltrados}
                             abrirModalEdicion={abrirModalEdicion}
                             abrirModalEliminacion={abrirModalEliminacion}
+                            generarPDFProducto={generarPDFProducto}
                         />
                     </div>
 
@@ -358,6 +387,7 @@ const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
                             productos={productosFiltrados}
                             abrirModalEdicion={abrirModalEdicion}
                             abrirModalEliminacion={abrirModalEliminacion}
+                            generarPDFProducto={generarPDFProducto}
                         />
                     </div>
                 </>

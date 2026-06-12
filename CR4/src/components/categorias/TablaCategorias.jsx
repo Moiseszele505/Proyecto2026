@@ -6,6 +6,7 @@ const TablaCategorias = ({
     categorias,
     abrirModalEdicion,
     abrirModalEliminacion,
+    generarPDFCategoria,
 }) => {
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +18,7 @@ const TablaCategorias = ({
         }
     }, [categorias]);
 
-    
+
 
     return (
         <>
@@ -62,6 +63,15 @@ const TablaCategorias = ({
                                     >
                                         <i className="bi bi-trash"></i>
                                     </Button>
+
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        className="m-1"
+                                        onClick={() => generarPDFCategoria(categoria)}
+                                    >
+                                        <i className="bi bi-file-earmark-pdf"></i>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}
@@ -73,4 +83,4 @@ const TablaCategorias = ({
 };
 
 
-export default TablaCategorias;
+export default TablaCategorias; 

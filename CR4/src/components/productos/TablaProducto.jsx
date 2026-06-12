@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button, Image } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-const TablaProductos = ({ productos, abrirModalEdicion, abrirModalEliminacion }) => {
+const TablaProductos = ({ productos, abrirModalEdicion, abrirModalEliminacion, generarPDFProducto, }) => {
     return (
         <Table striped borderless hover responsive size="sm">
             <thead>
@@ -13,6 +13,7 @@ const TablaProductos = ({ productos, abrirModalEdicion, abrirModalEliminacion })
                     <th className="d-none d-md-table-cell">Descripción</th>
                     <th>Precio</th>
                     <th>Stock</th>
+                    <th>Fecha</th>
                     <th className="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -44,7 +45,11 @@ const TablaProductos = ({ productos, abrirModalEdicion, abrirModalEliminacion })
 
                         <td>C$ {producto.precio_producto}</td>
                         <td>{producto.stock_producto}</td>
-
+                        <td>
+                            {producto.fecha_registro
+                                ? new Date(producto.fecha_registro).toLocaleDateString()
+                                : "Sin fecha"}
+                        </td>
                         <td className="text-center">
                             <Button
                                 variant="outline-warning"
@@ -61,6 +66,15 @@ const TablaProductos = ({ productos, abrirModalEdicion, abrirModalEliminacion })
                                 onClick={() => abrirModalEliminacion(producto)}
                             >
                                 <i className="bi bi-trash"></i>
+                            </Button>
+
+                            <Button
+                                variant="outline-danger"
+                                size="sm"
+                                className="m-1"
+                                onClick={() => generarPDFProducto(producto)}
+                            >
+                                <i className="bi bi-file-earmark-pdf"></i>
                             </Button>
                         </td>
                     </tr>

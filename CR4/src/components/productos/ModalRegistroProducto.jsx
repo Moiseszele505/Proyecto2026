@@ -123,6 +123,8 @@ const ModalRegistroProducto = ({
                                 />
                             </Form.Group>
                         </Col>
+
+                        
                     </Row>
                 </Form>
             </Modal.Body>

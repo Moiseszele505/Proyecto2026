@@ -52,8 +52,8 @@ const TarjetaCategoria = ({ categorias, abrirModalEdicion, abrirModalEliminacion
                             >
                                 <Card.Body
                                     className={`p-2 tarjeta-categoria-cuerpo ${tarjetaActiva
-                                            ? "tarjeta-categoria-cuerpo-activo"
-                                            : "tarjeta-categoria-cuerpo-inactivo"
+                                        ? "tarjeta-categoria-cuerpo-activo"
+                                        : "tarjeta-categoria-cuerpo-inactivo"
                                         }`}
                                 >
                                     <Row className="align-items-center gx-3">
@@ -114,6 +114,15 @@ const TarjetaCategoria = ({ categorias, abrirModalEdicion, abrirModalEliminacion
                                                 aria-label={`Eliminar ${categoria.nombre_categoria}`}
                                             >
                                                 <i className="bi bi-trash"></i>
+                                            </Button>
+
+                                            <Button
+                                                variant="outline-danger"
+                                                size="sm"
+                                                className="m-1"
+                                                onClick={() => generarPDFCategoria(categoria)}
+                                            >
+                                                <i className="bi bi-file-earmark-pdf"></i>
                                             </Button>
                                         </div>
                                     </div>
