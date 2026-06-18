@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Card, Row, Col, Button, Image } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-const TarjetaProducto = ({ productos, abrirModalEdicion, abrirModalEliminacion,generarPDFProducto }) => {
+const TarjetaProducto = ({ productos, abrirModalEdicion, abrirModalEliminacion, generarPDFProducto, copiarProducto,
+    generarQRImagen, }) => {
     const [idTarjetaActiva, setIdTarjetaActiva] = useState(null);
 
     const alternarTarjeta = (id) => {
@@ -94,6 +95,24 @@ const TarjetaProducto = ({ productos, abrirModalEdicion, abrirModalEliminacion,g
                                         onClick={() => generarPDFProducto(producto)}
                                     >
                                         <i className="bi bi-file-earmark-pdf"></i>
+                                    </Button>
+
+                                    <Button
+                                        variant="outline-success"
+                                        size="sm"
+                                        className="me-1"
+                                        onClick={() => copiarProducto(producto)}
+                                    >
+                                        <i className="bi bi-clipboard"></i>
+                                    </Button>
+
+                                    <Button
+                                        variant="outline-primary"
+                                        size="sm"
+                                        className="me-1"
+                                        onClick={() => generarQRImagen(producto)}
+                                    >
+                                        <i className="bi bi-qr-code"></i>
                                     </Button>
                                 </div>
                             )}

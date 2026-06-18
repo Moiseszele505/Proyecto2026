@@ -96,7 +96,7 @@ const Catalogo = () => {
             <Row className="text-center mb-3">
                 <Col>
                     <h2 className="fw-bold">Catálogo</h2>
-                    <p className="lead text-muted">Nuestros productos de belleza</p>
+                    <p className="lead text-muted">Todos los productos</p>
                 </Col>
             </Row>
 

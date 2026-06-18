@@ -10,6 +10,7 @@ import TablaProductos from "../components/productos/TablaProducto";
 import TarjetaProductos from "../components/productos/TarjetasProductos";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import ModalQRProducto from "../components/productos/ModalQRProducto";
 
 const Productos = () => {
     const [productos, setProductos] = useState([]);
@@ -34,6 +35,8 @@ const Productos = () => {
     const [mostrarModalEdicion, setMostrarModalEdicion] = useState(false);
     const [productoEditar, setProductoEditar] = useState(null);
     const [archivoActualizar, setArchivoActualizar] = useState(null);
+    const [mostrarModalQR, setMostrarModalQR] = useState(false);
+    const [productoQR, setProductoQR] = useState(null);
 
 
     // Manejo de inputs
@@ -336,6 +339,51 @@ const Productos = () => {
         doc.save(`producto_${producto.id_producto}.pdf`);
     };
 
+    const copiarProducto = async (producto) => {
+        if (!producto) return;
+
+        const texto = `
+ID: ${producto.id_producto}
+Producto: ${producto.nombre_producto}
+Descripción: ${producto.descripcion_producto || "Sin descripción"}
+Precio: C$ ${producto.precio_venta || 0}
+Categoría ID: ${producto.categoria_id || "Sin categoría"}
+Imagen: ${producto.imagen_producto || "Sin imagen"}
+    `;
+
+        try {
+            await navigator.clipboard.writeText(texto);
+
+            setToast({
+                mostrar: true,
+                mensaje: `Producto "${producto.nombre_producto}" copiado al portapapeles.`,
+                tipo: "exito",
+            });
+        } catch (error) {
+            console.error("Error al copiar:", error);
+
+            setToast({
+                mostrar: true,
+                mensaje: "No se pudo copiar el producto.",
+                tipo: "error",
+            });
+        }
+    };
+
+    const generarQRImagen = (producto) => {
+        if (!producto.imagen_producto) {
+            setToast({
+                mostrar: true,
+                mensaje: "Este producto no tiene imagen asociada.",
+                tipo: "advertencia",
+            });
+            return;
+        }
+
+        setProductoQR(producto);
+        setMostrarModalQR(true);
+    };
+
     return (
         <Container className="mt-3">
             {/* Título y botón */}
@@ -379,6 +427,8 @@ const Productos = () => {
                             abrirModalEdicion={abrirModalEdicion}
                             abrirModalEliminacion={abrirModalEliminacion}
                             generarPDFProducto={generarPDFProducto}
+                            copiarProducto={copiarProducto}
+                            generarQRImagen={generarQRImagen}
                         />
                     </div>
 
@@ -388,6 +438,8 @@ const Productos = () => {
                             abrirModalEdicion={abrirModalEdicion}
                             abrirModalEliminacion={abrirModalEliminacion}
                             generarPDFProducto={generarPDFProducto}
+                            copiarProducto={copiarProducto}
+                            generarQRImagen={generarQRImagen}
                         />
                     </div>
                 </>
@@ -433,6 +485,12 @@ const Productos = () => {
                 setMostrarModalEliminacion={setMostrarModalEliminacion}
                 eliminarProducto={eliminarProducto}
                 producto={productoAEliminar}
+            />
+
+            <ModalQRProducto
+                mostrar={mostrarModalQR}
+                onHide={() => setMostrarModalQR(false)}
+                producto={productoQR}
             />
         </Container>
     );
